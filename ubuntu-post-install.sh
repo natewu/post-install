@@ -18,7 +18,10 @@ curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microso
 sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
 sudo rm microsoft.gpg
-sudo apt install microsoft-edge-dev -y
+sudo apt install microsoft-edge-dev=99.0.1150.7-1 -y
+
+#Hold Edge version
+sudo apt-mark hold microsoft-edge-dev
 
 #Install Discord
 wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb"
@@ -27,6 +30,10 @@ sudo rm ./discord.deb
 
 #autoremove
 sudo apt autoremove -y
+
+#Configure Git
+git config --global user.email "36091727+natewu@users.noreply.github.com"
+git config --global user.name "natewu"
 
 #Done configuration
 echo "Post install script done"
